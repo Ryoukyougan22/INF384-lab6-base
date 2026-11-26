@@ -34,4 +34,8 @@ Funcionalidad para consultar los cursos de la malla y el detalle de un curso con
 
 #### Criterios de aceptación
 
-3.1 El sistema debe responder rápido y manejar los errores de forma segura.
+3.1 SI ocurre un error no controlado, EL sistema DEBE responder HTTP 500 con un mensaje de error genérico.
+
+3.2 CUANDO ocurra un error no controlado, EL sistema NO DEBE incluir el stack trace ni rutas internas del servidor en la respuesta.
+
+3.3 SI la cobertura de líneas es inferior al 80%, EL pipeline DEBE fallar.
