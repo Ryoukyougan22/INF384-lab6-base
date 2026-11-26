@@ -48,6 +48,18 @@
         "chatSessionId": "sess_d0f42d95-7d0e-4eca-b132-61c26dc81b38",
         "timestamp": 1795731509722
       }
+    ],
+    "5. Completar y verificar todas las pruebas funcionales y de seguridad": [
+      {
+        "executionId": "6eaaa35a-68de-4b22-b983-4be95da03196",
+        "chatSessionId": "sess_32ba8a59-3735-46d2-9d53-4ade72bc6b79",
+        "timestamp": 1795731603482
+      },
+      {
+        "executionId": "6eaaa35a-68de-4b22-b983-4be95da03196",
+        "chatSessionId": "sess_32ba8a59-3735-46d2-9d53-4ade72bc6b79",
+        "timestamp": 1795731716834
+      }
     ]
   }
 }

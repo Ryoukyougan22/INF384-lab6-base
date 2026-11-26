@@ -38,7 +38,7 @@
   - Verificar que las rutas existentes siguen pasando con el nuevo middleware de error ampliado.
   - _Requisitos: 2.1, 2.6, 4.2, 4.3_
 
-- [ ] 5. Completar y verificar todas las pruebas funcionales y de seguridad
+- [x] 5. Completar y verificar todas las pruebas funcionales y de seguridad
   - Completar los spies, mocks y casos pendientes de la tarea 1; restaurar los mocks después de cada test. Ejecutar `npm test` completo y verificar que todos los tests de `tests/habilitados.test.js` pasan, incluyendo los tests red-green de los tres hallazgos.
   - Confirmar que el caso de referencia `["1INF25","1INF27","1INF49"]` devuelve exactamente 27 cursos e incluye los IDs `1INF29`, `1INF30`, `1INF31` y `1INF32`.
   - Confirmar que los tests de normalización (`1inf25` → mismo resultado que `1INF25`) pasan (criterio 1.8).
