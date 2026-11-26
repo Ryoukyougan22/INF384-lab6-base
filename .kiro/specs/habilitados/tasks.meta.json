@@ -1,0 +1,89 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1. Crear las pruebas de aceptación inicialmente fallidas": [
+      {
+        "executionId": "f8ebb1ce-cf0e-496d-af99-64a8424965d1",
+        "chatSessionId": "sess_4aec8f95-6f0f-4bac-bfad-6cf3487238ec",
+        "timestamp": 1795730685430
+      },
+      {
+        "executionId": "f8ebb1ce-cf0e-496d-af99-64a8424965d1",
+        "chatSessionId": "sess_4aec8f95-6f0f-4bac-bfad-6cf3487238ec",
+        "timestamp": 1795730795257
+      }
+    ],
+    "2. Implementar `calcularHabilitados(aprobadosSet)` en el repositorio": [
+      {
+        "executionId": "ed4f934e-2453-4024-bcbb-4f1d292f6b0c",
+        "chatSessionId": "sess_09775bb0-b14d-4e11-97ad-d62412cd526f",
+        "timestamp": 1795730959938
+      },
+      {
+        "executionId": "ed4f934e-2453-4024-bcbb-4f1d292f6b0c",
+        "chatSessionId": "sess_09775bb0-b14d-4e11-97ad-d62412cd526f",
+        "timestamp": 1795731110485
+      }
+    ],
+    "3. Implementar `POST /habilitados` con validación completa de entrada": [
+      {
+        "executionId": "774368ca-a933-4da7-9c05-c164720035eb",
+        "chatSessionId": "sess_0014e0ec-d8d8-42e5-b8dc-e7f2551b51b4",
+        "timestamp": 1795731201162
+      },
+      {
+        "executionId": "774368ca-a933-4da7-9c05-c164720035eb",
+        "chatSessionId": "sess_0014e0ec-d8d8-42e5-b8dc-e7f2551b51b4",
+        "timestamp": 1795731371303
+      }
+    ],
+    "4. Implementar manejo seguro de errores del parser y errores inesperados": [
+      {
+        "executionId": "077f6d66-fa09-4d0e-ab99-56efa4b3ca3b",
+        "chatSessionId": "sess_d0f42d95-7d0e-4eca-b132-61c26dc81b38",
+        "timestamp": 1795731469261
+      },
+      {
+        "executionId": "077f6d66-fa09-4d0e-ab99-56efa4b3ca3b",
+        "chatSessionId": "sess_d0f42d95-7d0e-4eca-b132-61c26dc81b38",
+        "timestamp": 1795731509722
+      }
+    ],
+    "5. Completar y verificar todas las pruebas funcionales y de seguridad": [
+      {
+        "executionId": "6eaaa35a-68de-4b22-b983-4be95da03196",
+        "chatSessionId": "sess_32ba8a59-3735-46d2-9d53-4ade72bc6b79",
+        "timestamp": 1795731603482
+      },
+      {
+        "executionId": "6eaaa35a-68de-4b22-b983-4be95da03196",
+        "chatSessionId": "sess_32ba8a59-3735-46d2-9d53-4ade72bc6b79",
+        "timestamp": 1795731716834
+      }
+    ],
+    "7. Implementar el gate SCA (`npm audit`) y obtener evidencia del run fallido por Lodash": [
+      {
+        "executionId": "3e80ac5e-f49c-454e-b859-ed3bb45e465f",
+        "chatSessionId": "sess_5a87e229-5c0a-46fb-a87b-80860d70e14a",
+        "timestamp": 1795732086382
+      },
+      {
+        "executionId": "3e80ac5e-f49c-454e-b859-ed3bb45e465f",
+        "chatSessionId": "sess_5a87e229-5c0a-46fb-a87b-80860d70e14a",
+        "timestamp": 1795732200601
+      }
+    ],
+    "9. Implementar el gate de detección de secretos con Gitleaks": [
+      {
+        "executionId": "c25d7a81-e567-4063-95c0-147156177134",
+        "chatSessionId": "sess_426510d2-2be0-4d66-93e3-a9eb5d5266e6",
+        "timestamp": 1795732582820
+      },
+      {
+        "executionId": "c25d7a81-e567-4063-95c0-147156177134",
+        "chatSessionId": "sess_426510d2-2be0-4d66-93e3-a9eb5d5266e6",
+        "timestamp": 1795732714267
+      }
+    ]
+  }
+}

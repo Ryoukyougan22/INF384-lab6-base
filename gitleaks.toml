@@ -1,0 +1,6 @@
+# Gitleaks configuration
+# Conserva todas las reglas predeterminadas.
+# No se aplican exclusiones generales.
+
+[extend]
+useDefault = true

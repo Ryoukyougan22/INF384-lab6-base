@@ -47,4 +47,52 @@ describe('repositorio de cursos', () => {
       expect(repositorio.obtener('XXX999')).toBeUndefined();
     });
   });
+
+  describe('calcularHabilitados(aprobadosSet)', () => {
+    test('lista vacía devuelve solo los cursos sin prerrequisitos', () => {
+      const resultado = repositorio.calcularHabilitados(new Set());
+      const sinRequisitos = repositorio
+        .listar()
+        .filter((c) => c.prerequisites.length === 0);
+
+      expect(resultado).toHaveLength(sinRequisitos.length);
+      expect(resultado.map((c) => c.id).sort()).toEqual(
+        sinRequisitos.map((c) => c.id).sort(),
+      );
+    });
+
+    test('caso de referencia devuelve exactamente 27 cursos', () => {
+      const aprobadosSet = new Set(['1INF25', '1INF27', '1INF49']);
+      const resultado = repositorio.calcularHabilitados(aprobadosSet);
+
+      expect(resultado).toHaveLength(27);
+    });
+
+    test('caso de referencia incluye los cuatro IDs esperados', () => {
+      const aprobadosSet = new Set(['1INF25', '1INF27', '1INF49']);
+      const ids = repositorio.calcularHabilitados(aprobadosSet).map((c) => c.id);
+
+      expect(ids).toContain('1INF29');
+      expect(ids).toContain('1INF30');
+      expect(ids).toContain('1INF31');
+      expect(ids).toContain('1INF32');
+    });
+
+    test('cursos ya aprobados no aparecen en el resultado', () => {
+      const aprobadosSet = new Set(['1INF25', '1INF27', '1INF49']);
+      const ids = repositorio.calcularHabilitados(aprobadosSet).map((c) => c.id);
+
+      expect(ids).not.toContain('1INF25');
+      expect(ids).not.toContain('1INF27');
+      expect(ids).not.toContain('1INF49');
+    });
+
+    test('curso con prerrequisitos parcialmente satisfechos no aparece', () => {
+      // 1INF32 requiere ['1INF27', '1INF25']; con solo 1INF25 no debe habilitarse.
+      const aprobadosSet = new Set(['1INF25']);
+      const ids = repositorio.calcularHabilitados(aprobadosSet).map((c) => c.id);
+
+      expect(ids).not.toContain('1INF32');
+    });
+  });
 });
