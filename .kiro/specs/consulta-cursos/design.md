@@ -39,8 +39,19 @@ API REST de solo lectura sobre los datos de `data/cursos.json`, cargados en memo
 | --- | --- |
 | `ciclo` inválido | `400 { "error": "ciclo debe ser un entero entre 5 y 10" }` |
 | Código inexistente | `404 { "error": "curso no encontrado" }` |
+| Error no controlado | `500 { "error": "error interno del servidor" }`, sin stack trace ni rutas internas |
 
 ## Estrategia de pruebas
 
 - Tests de rutas con supertest, uno o más por criterio de aceptación.
 - Tests de `repositorio.js` con los datos reales de `data/cursos.json`.
+
+## Quality Gate: Cobertura de pruebas
+
+- Herramienta: Jest Coverage.
+- Umbral: cobertura global de líneas de al menos 80%.
+- Política: bloqueante.
+- Etapa: pull requests hacia main y pushes a main.
+- Justificación: detectar cambios que reduzcan la cobertura
+  por debajo del mínimo establecido y prevenir la integración
+  de código insuficientemente probado.
