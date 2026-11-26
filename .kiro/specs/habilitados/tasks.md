@@ -73,7 +73,7 @@
   - Registrar en `TRAZABILIDAD.md`: versión anterior, versión nueva (o eliminación), URL del run corregido.
   - _Requisitos: 5.2_
 
-- [ ] 9. Implementar el gate de detección de secretos con Gitleaks
+- [x] 9. Implementar el gate de detección de secretos con Gitleaks
   - Añadir un job independiente `secrets` en `.github/workflows/ci.yml` en paralelo con `build` y `sca`, sin dependencia entre jobs, con: `actions/checkout@v4` (con `fetch-depth: 0`), instalación de Gitleaks CLI v8 con versión concreta fijada desde su distribución oficial.
   - Ejecutar dos modos explícitos: (1) `gitleaks git --log-opts="HEAD" --redact --exit-code 1 .` para el historial completo alcanzable desde HEAD; (2) `gitleaks dir --redact --exit-code 1 "$TRACKED_SNAPSHOT"` donde `TRACKED_SNAPSHOT` es un directorio temporal con el snapshot de `git archive HEAD` (solo archivos versionados, sin `.git` ni `node_modules`).
   - Ejecutar inicialmente sin exclusiones nuevas y revisar los hallazgos reales, incluyendo los posibles hallazgos en `config/ejemplo.env`. Aplicar excepciones específicas únicamente tras verificar que se trata de un falso positivo o de una clave previamente revocada/rotada, documentando el motivo y usando la configuración o `.gitleaksignore` de forma coherente en ambos modos. Conservar las reglas por defecto y nunca exceptuar secretos activos.

@@ -72,6 +72,18 @@
         "chatSessionId": "sess_5a87e229-5c0a-46fb-a87b-80860d70e14a",
         "timestamp": 1795732200601
       }
+    ],
+    "9. Implementar el gate de detección de secretos con Gitleaks": [
+      {
+        "executionId": "c25d7a81-e567-4063-95c0-147156177134",
+        "chatSessionId": "sess_426510d2-2be0-4d66-93e3-a9eb5d5266e6",
+        "timestamp": 1795732582820
+      },
+      {
+        "executionId": "c25d7a81-e567-4063-95c0-147156177134",
+        "chatSessionId": "sess_426510d2-2be0-4d66-93e3-a9eb5d5266e6",
+        "timestamp": 1795732714267
+      }
     ]
   }
 }

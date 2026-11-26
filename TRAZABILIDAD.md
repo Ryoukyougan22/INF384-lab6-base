@@ -28,7 +28,7 @@
 | 4.4 | `formato inválido no invoca el cálculo` (spy de `calcularHabilitados` no invocado) | Bloqueante | PR (CI build) | Tarea 1 — falla con 404 | Tarea 5 — **PASS** (spy confirma que `calcularHabilitados` no se invoca con formato inválido) |
 | 5.1 | Jest con cobertura global de líneas ≥ 80% (`npm test -- --coverage`) | Bloqueante | PR (CI build) | [PENDIENTE: URL del run fallido] | [PENDIENTE: URL del run corregido] |
 | 5.2 | `npm audit --audit-level=high` (job `sca`) | Bloqueante | PR (CI sca) | [PENDIENTE: URL del run fallido — Lodash 4.17.20, 1 high severity] | [PENDIENTE: URL del run corregido] |
-| 5.3 | Gitleaks CLI v8 — historial + snapshot HEAD (job `secrets`) | Bloqueante | PR (CI secrets) | [PENDIENTE: URL del run fallido] | [PENDIENTE: URL del run corregido] |
+| 5.3 | Gitleaks CLI v8.21.2 — historial + snapshot HEAD (job `secrets`) | Bloqueante | PR (CI secrets) | [PENDIENTE: URL del run fallido — fixture ficticio en rama de prueba] | [PENDIENTE: URL del run corregido — rama `feature/habilitados` limpia] |
 
 ### Nota sobre los tres hallazgos de seguridad (Tarea 1)
 
@@ -113,3 +113,43 @@ Will install lodash@4.18.1, which is outside the stated dependency range
 - **Advisories:** GHSA-35jh-r3h4-6jhm (Command Injection), GHSA-29mw-wpgm-hmr9 (ReDoS), GHSA-r5fr-rjxr-66jc (Code Injection en `_.template`), GHSA-xxjr-mmjv-4gpg (Prototype Pollution)
 - **Exit code:** 1 — confirma que `npm audit --audit-level=high` falla con la versión actual
 - **URL del run fallido en CI:** [PENDIENTE: URL del run fallido — Lodash 4.17.20] _(disponible tras hacer push y que GitHub Actions ejecute el job `sca`)_
+
+## Gate de secretos con Gitleaks (Tarea 9)
+
+### Configuración de Gitleaks
+
+| Parámetro | Valor |
+| --- | --- |
+| Herramienta | Gitleaks CLI v8.21.2 (versión fijada en CI) |
+| Instalación | Descarga directa desde la distribución oficial (`github.com/gitleaks/gitleaks/releases`) |
+| Modo 1 | `gitleaks git --log-opts="HEAD" --redact --exit-code 1 --config gitleaks.toml .` |
+| Modo 2 | `gitleaks dir --redact --exit-code 1 --config gitleaks.toml "$TRACKED_SNAPSHOT"` |
+| Snapshot HEAD | `git archive HEAD \| tar -x -C "$TRACKED_SNAPSHOT"` (solo archivos versionados, sin `.git` ni `node_modules`) |
+| Archivo de configuración | `gitleaks.toml` (en raíz del repositorio) |
+| Reglas | Por defecto (`useDefault = true`); ninguna regla deshabilitada |
+| `continue-on-error` | No |
+| `\|\| true` | No |
+
+### Hallazgos reales detectados en la inspección
+
+**Archivo:** `config/ejemplo.env`  
+**Línea:** `CATALOGO_API_KEY=Q7mZk2Rv9XpL4tWc8NbJ3hYf6GsD1aEu`  
+**Motivo:** cadena alfanumérica de 32 caracteres que activa la regla de detección de API keys genéricas de Gitleaks.  
+**Naturaleza:** valor **ficticio e inerte**. El archivo se llama `ejemplo.env`, incluye el comentario `# Configuración de ejemplo para desarrollo local` y fue introducido en el primer commit del repositorio como plantilla de configuración local. Esta clave nunca ha sido una credencial operativa.
+
+### Excepción aplicada
+
+| Campo | Detalle |
+| --- | --- |
+| Archivo | `gitleaks.toml` (raíz del repositorio) |
+| Mecanismo | `[[allowlists]]` con `paths = ['config/ejemplo\.env']` |
+| Alcance | Solo el archivo `config/ejemplo.env`; ninguna otra ruta ni regla excluida |
+| Coherencia | `--config gitleaks.toml` se pasa en ambos modos (`git` y `dir`) |
+| Justificación | El archivo es una plantilla de desarrollo local con valores ficticios, presente desde el primer commit. No suprime ningún secreto activo ni deshabilita ninguna regla de detección. |
+
+### Evidencia de CI (Tarea 9)
+
+| Evento | URL |
+| --- | --- |
+| Run fallido (fixture en rama de prueba) | [PENDIENTE: URL del run fallido — fixture ficticio en rama aislada] |
+| Run corregido (`feature/habilitados` limpia) | [PENDIENTE: URL del run corregido — rama `feature/habilitados`] |
