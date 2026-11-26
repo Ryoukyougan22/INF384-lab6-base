@@ -130,12 +130,31 @@ Will install lodash@4.18.1, which is outside the stated dependency range
 | `continue-on-error` | No |
 | `\|\| true` | No |
 
-### Hallazgos reales detectados en la inspección
+### Hallazgos reales detectados
 
-**Archivo:** `config/ejemplo.env`  
-**Línea:** `CATALOGO_API_KEY=Q7mZk2Rv9XpL4tWc8NbJ3hYf6GsD1aEu`  
-**Motivo:** cadena alfanumérica de 32 caracteres que activa la regla de detección de API keys genéricas de Gitleaks.  
-**Naturaleza:** valor **ficticio e inerte**. El archivo se llama `ejemplo.env`, incluye el comentario `# Configuración de ejemplo para desarrollo local` y fue introducido en el primer commit del repositorio como plantilla de configuración local. Esta clave nunca ha sido una credencial operativa.
+| Archivo | Línea original | Regla |
+| --- | --- | --- |
+| config/ejemplo.env | 4 | generic-api-key |
+| TRAZABILIDAD.md | 136 | generic-api-key |
+
+Gitleaks detectó dos ocurrencias de un mismo valor presente
+en la plantilla de configuración de ejemplo del repositorio.
+La segunda ocurrencia fue introducida al documentar el hallazgo.
+
+### Corrección aplicada
+
+- Se retiró el valor literal del archivo config/ejemplo.env.
+- Se retiró el valor literal de TRAZABILIDAD.md.
+- Se conservaron todas las reglas predeterminadas de Gitleaks.
+- No se excluyeron archivos completos ni reglas de detección.
+- El escaneo histórico permanece habilitado.
+
+Evidencia RED:
+https://github.com/Ryoukyougan22/INF384-lab6-base/actions/runs/45906475049
+
+Resultado: 2 hallazgos, 25 commits analizados y código de salida 1.
+
+Evidencia GREEN: [PENDIENTE]
 
 ### Excepción aplicada
 
