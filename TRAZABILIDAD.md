@@ -27,7 +27,7 @@
 | 4.3 | `errores 400 no exponen detalles internos` / `errores 500 no exponen detalles internos` (2 casos) | Bloqueante | PR (CI build) | Tarea 1 — falla con 404 / 500 | Tarea 5 — **PASS** (2/2 casos, sin stack traces ni rutas internas) |
 | 4.4 | `formato inválido no invoca el cálculo` (spy de `calcularHabilitados` no invocado) | Bloqueante | PR (CI build) | Tarea 1 — falla con 404 | Tarea 5 — **PASS** (spy confirma que `calcularHabilitados` no se invoca con formato inválido) |
 | 5.1 | Jest con cobertura global de líneas ≥ 80% (`npm test -- --coverage`) | Bloqueante | PR (CI build) | [PENDIENTE: URL del run fallido] | [PENDIENTE: URL del run corregido] |
-| 5.2 | `npm audit --audit-level=high` (job `sca`) | Bloqueante | PR (CI sca) | [PENDIENTE: URL del run fallido — Lodash] | [PENDIENTE: URL del run corregido] |
+| 5.2 | `npm audit --audit-level=high` (job `sca`) | Bloqueante | PR (CI sca) | [PENDIENTE: URL del run fallido — Lodash 4.17.20, 1 high severity] | [PENDIENTE: URL del run corregido] |
 | 5.3 | Gitleaks CLI v8 — historial + snapshot HEAD (job `secrets`) | Bloqueante | PR (CI secrets) | [PENDIENTE: URL del run fallido] | [PENDIENTE: URL del run corregido] |
 
 ### Nota sobre los tres hallazgos de seguridad (Tarea 1)
@@ -82,3 +82,34 @@ Los 41 fallos de `habilitados.test.js` son esperados en la fase roja de TDD. Tod
 | --- | --- | --- | --- |
 | `requirements.md` criterio 3.2 | "CUANDO el array `aprobados` contenga exactamente 200 elementos con códigos de formato válido y la solicitud cumpla los demás requisitos de validación, EL Sistema DEBE responder sin degradación observable" (redacción original imprecisa sobre la respuesta esperada) | Se reemplazó por: "EL Sistema DEBE responder HTTP 200" | La condición "sin degradación observable" no es verificable automáticamente. El criterio verificable es que el sistema responda HTTP 200, lo que permite escribir una prueba determinista y un gate de CI. |
 | `requirements.md` criterio 5.2 | "EL Pipeline DEBE fallar si existen vulnerabilidades en las dependencias" (declaración general sin umbral) | Se reemplazó por: "SI se detecta al menos una vulnerabilidad de severidad **alta o crítica** en las dependencias del proyecto, EL Pipeline DEBE fallar" | Sin umbral concreto, el gate no es accionable: `npm audit` distingue severidades Low / Moderate / High / Critical y el comando `--audit-level=high` solo falla ante High o Critical. El criterio anterior habría obligado a bloquear ante vulnerabilidades Moderate o Low, lo que es excesivo para la política de TI del laboratorio. |
+
+## Evidencia local del gate SCA (Tarea 7)
+
+### Versión de Lodash instalada
+
+```
+malla-inf@1.0.0
+└── lodash@4.17.20
+```
+
+### Salida de `npm audit` (antes de corregir)
+
+```
+# npm audit report
+lodash  <=4.17.23
+Severity: high
+Command Injection in lodash - https://github.com/advisories/GHSA-35jh-r3h4-6jhm
+Regular Expression Denial of Service (ReDoS) in lodash - https://github.com/advisories/GHSA-29mw-wpgm-hmr9
+lodash vulnerable to Code Injection via `_.template` imports key names - https://github.com/advisories/GHSA-r5fr-rjxr-66jc
+Lodash has Prototype Pollution Vulnerability in `_.unset`, `_.omit`, and `_.pullAt` functions - https://github.com/advisories/GHSA-xxjr-mmjv-4gpg
+fix available via `npm audit fix --force`
+Will install lodash@4.18.1, which is outside the stated dependency range
+
+1 high severity vulnerability
+```
+
+- **Versión instalada:** lodash 4.17.20 (rango afectado: `<=4.17.23`)
+- **Severidad:** high
+- **Advisories:** GHSA-35jh-r3h4-6jhm (Command Injection), GHSA-29mw-wpgm-hmr9 (ReDoS), GHSA-r5fr-rjxr-66jc (Code Injection en `_.template`), GHSA-xxjr-mmjv-4gpg (Prototype Pollution)
+- **Exit code:** 1 — confirma que `npm audit --audit-level=high` falla con la versión actual
+- **URL del run fallido en CI:** [PENDIENTE: URL del run fallido — Lodash 4.17.20] _(disponible tras hacer push y que GitHub Actions ejecute el job `sca`)_
