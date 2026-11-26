@@ -121,4 +121,34 @@ CI #15 y #16 demuestran el fallo por hallazgos existentes; no fue necesario inse
 
 ## 8. Estado de integración y entrega
 
-La ejecución completa CI #17 corresponde al pull request de `feature/habilitados` hacia `main`, no a un push final en `main`. Los tres jobs finalizaron exitosamente. El merge final debe realizarse después de confirmar las excepciones históricas, completar la documentación y comprobar los controles en el PR. Tras integrar, verificar la ejecución generada por el push a `main` y registrar su enlace. Si se exige bloqueo efectivo de merge, configurar y verificar checks obligatorios `build`, `sca` y `secrets` en la protección de `main`.
+El Pull Request #1 de feature/habilitados hacia main fue
+fusionado correctamente mediante un merge commit, conservando
+el historial de desarrollo.
+
+La rama main cuenta con protección activa y exige los siguientes
+status checks de GitHub Actions:
+
+- build: pruebas automatizadas y cobertura global de líneas >= 80%.
+- sca: auditoría de dependencias High/Critical.
+- secrets: detección de secretos mediante Gitleaks.
+
+Los controles son obligatorios para todos los usuarios.
+
+### Evidencia de integración en main
+
+- Ejecución: CI #19.
+- Commit: 88a4fdf.
+- Evento: push a main.
+- Resultado: Success.
+- Pruebas: 89 de 89 aprobadas.
+- Suites: 5 de 5 aprobadas.
+- Cobertura de líneas: 97.11%.
+- Vulnerabilidades detectadas: 0.
+- Gitleaks: 27 commits analizados, sin hallazgos no exceptuados.
+- Jobs build, sca y secrets: exitosos.
+
+URL:
+https://github.com/Ryoukyougan22/INF384-lab6-base/actions/runs/45907786593
+
+El Pull Request #2, utilizado para demostrar el fallo del
+Quality Gate de cobertura, fue cerrado sin fusionarse a main.

@@ -48,7 +48,7 @@
   - Confirmar que las pruebas existentes de `cursos.test.js`, `repositorio.test.js`, `formato.test.js` y `health.test.js` siguen pasando.
   - _Requisitos: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 3.1, 3.2, 3.3, 3.4, 4.1, 4.2, 4.3, 4.4_
 
-- [ ] 6. Verificar el Quality Gate de cobertura global de líneas ≥ 80%
+- [x] 6. Verificar el Quality Gate de cobertura global de líneas ≥ 80%
   - Confirmar que `jest.config.js` tiene `coverageThreshold: { global: { lines: 80 } }` (ya existe del spec `consulta-cursos`; no bajar el umbral).
   - Ejecutar `npm test -- --coverage` localmente y verificar que la cobertura global de líneas es ≥ 80%.
   - Realizar una comprobación controlada en una rama de prueba aislada creada desde la rama de implementación: retirar temporalmente suficientes pruebas para reducir la cobertura por debajo del 80%, manteniendo intactos el código fuente, la configuración y el umbral. Confirmar localmente con `npm test -- --coverage` que los tests restantes pasan y que el fallo se debe a cobertura insuficiente.
@@ -64,7 +64,7 @@
   - Registrar en `TRAZABILIDAD.md`: versión de Lodash instalada (`npm ls lodash`), advisory reportado, URL del run fallido.
   - _Requisitos: 5.2_
 
-- [ ] 8. Corregir la vulnerabilidad de Lodash y obtener evidencia del gate SCA corregido
+- [x] 8. Corregir la vulnerabilidad de Lodash y obtener evidencia del gate SCA corregido
   - Revisar primero si Lodash se utiliza en el proyecto y si es dependencia directa o transitiva. Si es directa y no se utiliza, evaluar eliminarla; en caso contrario, actualizar de forma dirigida a una versión compatible sin vulnerabilidades High/Critical según el audit, o actualizar la dependencia que la incorpora. Evitar `npm audit fix --force` indiscriminado. Revisar package.json y package-lock.json.
   - Verificar que `npm audit --audit-level=high` retorna código 0 localmente.
   - Ejecutar `npm test -- --coverage` para confirmar que las pruebas existentes siguen pasando con la versión actualizada.
@@ -82,7 +82,7 @@
   - Registrar en `TRAZABILIDAD.md`: configuración de Gitleaks usada, hallazgos reales encontrados, excepciones aplicadas (si las hay) con su justificación.
   - _Requisitos: 5.3_
 
-- [ ] 10. Obtener evidencia de fallo y corrección del gate de secretos
+- [x] 10. Obtener evidencia de fallo y corrección del gate de secretos
   - Si ya existe evidencia de un hallazgo real corregido en la tarea 9, reutilizarla. Si se requiere una demostración adicional, crear una rama de prueba aislada desde la implementación limpia que contiene el gate, sin introducir cambios en `main` ni en `feature/habilitados`.
   - Utilizar exclusivamente un fixture ficticio, inerte y no operativo que active una regla de Gitleaks. Verificar que el detector reconoce el fixture; no incluir el valor literal en tasks.md ni en TRAZABILIDAD.md. Nunca usar credenciales reales o activas.
   - Hacer commit y push de la rama de prueba y abrir un pull request hacia `main` del propio fork para activar el pipeline. Verificar que el job `secrets` falla por el hallazgo y guardar la URL del run y el tipo de hallazgo con salida redactada.
@@ -90,7 +90,7 @@
   - Documentar el procedimiento, la regla detectada, el alcance del escaneo y los enlaces de ambas ejecuciones. Si el modo de escaneo impide demostrar algún estado rojo/verde, explicar el motivo y registrar únicamente resultados reales, conforme al enunciado.
   - _Requisitos: 5.3_
 
-- [ ] 11. Completar `TRAZABILIDAD.md` con todos los requisitos, evidencias y cambios
+- [x] 11. Completar `TRAZABILIDAD.md` con todos los requisitos, evidencias y cambios
   - Completar `TRAZABILIDAD.md` con una tabla que cubra todos los requisitos no funcionales (criterios 2.1–5.3) incluyendo: requisito, test o gate, condición, política, etapa, URL/nombre del run o test fallido (evidencia roja), URL/nombre del run o test corregido (evidencia verde).
   - Registrar los nombres definitivos de los tests de los tres hallazgos de seguridad con sus resultados reales (antes y después de la corrección).
   - Documentar los dos cambios reales realizados a la propuesta inicial de Kiro con justificación: (1) cambio en criterio 3.2 de `requirements.md`: reemplazo de "límites normales de respuesta sin degradación observable" por el caso verificable de exactamente 200 elementos válidos que responde HTTP 200; (2) cambio en criterio 5.2 de `requirements.md`: reemplazo de una declaración general por la condición concreta de fallo del pipeline ante High/Critical en las dependencias.
