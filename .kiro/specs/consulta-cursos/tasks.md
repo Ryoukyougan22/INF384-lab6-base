@@ -13,3 +13,11 @@
 
 - [ ] 3. Middleware de manejo de errores
   - Respuesta genérica para errores no controlados
+  - Evitar exposición de stack traces y rutas internas
+  - Tests para errores no controlados
+  - _Requisitos: 3.1, 3.2_
+
+- [ ] 4. Configurar Quality Gate de cobertura
+  - Configurar umbral global de líneas de 80% en Jest
+  - Ejecutar cobertura en el pipeline de GitHub Actions
+  - _Requisitos: 3.3_
