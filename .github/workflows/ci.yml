@@ -59,6 +59,7 @@ jobs:
         run: |
           ./gitleaks git \
             --log-opts="HEAD" \
+            --verbose \
             --redact \
             --exit-code 1 \
             --config gitleaks.toml \

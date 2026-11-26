@@ -1,15 +1,6 @@
 # Gitleaks configuration
-# Extends the default ruleset; no rules are disabled or overridden.
+# Conserva todas las reglas predeterminadas.
+# No se aplican exclusiones generales.
 
 [extend]
 useDefault = true
-
-# Allowlist: targets only the example/dummy credentials in the
-# example configuration file shipped as a template for local development.
-# The file is named "ejemplo.env" and contains only placeholder values
-# (e.g. CATALOGO_API_KEY=Q7mZk2Rv9XpL4tWc8NbJ3hYf6GsD1aEu) that have
-# never been used as real credentials. This exception is specific to the
-# file path and does not suppress any other finding or rule.
-[[allowlists]]
-description = "Valores ficticios en el archivo de configuración de ejemplo para desarrollo local"
-paths = ['''config/ejemplo\.env''']
