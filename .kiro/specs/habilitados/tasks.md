@@ -57,7 +57,7 @@
   - Registrar en `TRAZABILIDAD.md`: URL del run fallido, URL del run corregido, cobertura antes y después.
   - _Requisitos: 5.1_
 
-- [ ] 7. Implementar el gate SCA (`npm audit`) y obtener evidencia del run fallido por Lodash
+- [x] 7. Implementar el gate SCA (`npm audit`) y obtener evidencia del run fallido por Lodash
   - Añadir un job independiente `sca` en `.github/workflows/ci.yml` con: `actions/checkout@v4`, `actions/setup-node@v4` (Node 22, cache npm), `npm ci` y `npm audit --audit-level=high`.
   - No corregir Lodash antes de obtener la evidencia. Verificar su versión instalada mediante `npm ls lodash` y los advisories reales mediante `npm audit`; no asumir una versión exacta ni un resultado futuro. No desplegar el servicio vulnerable.
   - Hacer commit y push en `feature/habilitados` y abrir o actualizar su PR hacia `main` del fork; verificar que el job `sca` falla por la vulnerabilidad High/Critical y guardar la URL real del run antes de corregir Lodash.

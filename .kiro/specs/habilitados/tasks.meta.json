@@ -60,6 +60,18 @@
         "chatSessionId": "sess_32ba8a59-3735-46d2-9d53-4ade72bc6b79",
         "timestamp": 1795731716834
       }
+    ],
+    "7. Implementar el gate SCA (`npm audit`) y obtener evidencia del run fallido por Lodash": [
+      {
+        "executionId": "3e80ac5e-f49c-454e-b859-ed3bb45e465f",
+        "chatSessionId": "sess_5a87e229-5c0a-46fb-a87b-80860d70e14a",
+        "timestamp": 1795732086382
+      },
+      {
+        "executionId": "3e80ac5e-f49c-454e-b859-ed3bb45e465f",
+        "chatSessionId": "sess_5a87e229-5c0a-46fb-a87b-80860d70e14a",
+        "timestamp": 1795732200601
+      }
     ]
   }
 }
