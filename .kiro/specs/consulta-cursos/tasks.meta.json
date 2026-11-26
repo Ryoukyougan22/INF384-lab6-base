@@ -36,6 +36,18 @@
         "chatSessionId": "sess_e5b54f5f-c3e3-4f54-9dc0-c203b8a7ae64",
         "timestamp": 1795728652350
       }
+    ],
+    "4. Configurar Quality Gate de cobertura": [
+      {
+        "executionId": "303e33a9-6c25-471c-aa9c-6629e064bf9b",
+        "chatSessionId": "sess_46b5c496-8086-4dcc-8264-f17e90656561",
+        "timestamp": 1795728710681
+      },
+      {
+        "executionId": "303e33a9-6c25-471c-aa9c-6629e064bf9b",
+        "chatSessionId": "sess_46b5c496-8086-4dcc-8264-f17e90656561",
+        "timestamp": 1795728784032
+      }
     ]
   }
 }
