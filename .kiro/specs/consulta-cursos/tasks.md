@@ -11,7 +11,7 @@
   - Tests para 2.1 y 2.2
   - _Requisitos: 2.1, 2.2_
 
-- [ ] 3. Middleware de manejo de errores
+- [x] 3. Middleware de manejo de errores
   - Respuesta genérica para errores no controlados
   - Evitar exposición de stack traces y rutas internas
   - Tests para errores no controlados

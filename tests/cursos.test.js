@@ -157,3 +157,70 @@ describe('GET /cursos/:codigo', () => {
     });
   });
 });
+
+// ─── Requisitos 3.1 y 3.2 – Middleware de manejo de errores ──────────────────
+//
+// Usamos una mini-app auxiliar que monta primero la ruta que lanza y luego
+// el mismo middleware de error exportado en app.js, así el orden de registro
+// queda: ruta-que-lanza → error-handler, que es lo que Express requiere.
+
+const express = require('express');
+
+function buildTestApp() {
+  const testApp = express();
+  testApp.use(express.json());
+
+  // Ruta que lanza deliberadamente con un mensaje que contiene rutas internas
+  testApp.get('/test-error', (_req, _res, _next) => {
+    throw new Error('error de prueba interno /home/usuario/proyecto/secret.js at Object.<anonymous> (/src/server.js:10:5)');
+  });
+
+  // El mismo middleware de error que usa app.js (4 argumentos)
+  // eslint-disable-next-line no-unused-vars
+  testApp.use((err, req, res, next) => {
+    res.status(500).json({ error: 'error interno del servidor' });
+  });
+
+  return testApp;
+}
+
+describe('Middleware de manejo de errores', () => {
+  let errorApp;
+
+  beforeAll(() => {
+    errorApp = buildTestApp();
+  });
+
+  // Requisito 3.1 – error no controlado → 500 con mensaje genérico
+  describe('3.1 error no controlado → 500', () => {
+    test('responde 500 con el mensaje genérico', async () => {
+      const res = await request(errorApp).get('/test-error');
+
+      expect(res.status).toBe(500);
+      expect(res.body).toEqual({ error: 'error interno del servidor' });
+    });
+  });
+
+  // Requisito 3.2 – sin stack trace ni rutas internas en la respuesta
+  describe('3.2 sin stack trace ni rutas internas', () => {
+    test('la respuesta no contiene stack trace', async () => {
+      const res = await request(errorApp).get('/test-error');
+
+      const body = JSON.stringify(res.body);
+      expect(body).not.toMatch(/at\s+\w/);        // líneas de stack "at Function..."
+      expect(body).not.toContain('Error:');
+      expect(body).not.toContain('.js:');          // referencias a archivos fuente
+    });
+
+    test('la respuesta no contiene rutas internas del servidor', async () => {
+      const res = await request(errorApp).get('/test-error');
+
+      const body = JSON.stringify(res.body);
+      // No deben aparecer separadores de ruta del SO ni fragmentos del mensaje
+      // original que lleva rutas de archivo
+      expect(body).not.toContain('/home/');
+      expect(body).not.toContain('/src/');
+      expect(body).not.toContain('secret');
+    });
+  });
+});
