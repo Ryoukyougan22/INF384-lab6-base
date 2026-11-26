@@ -21,6 +21,29 @@ router.get('/', (req, res) => {
   return res.json(repositorio.listar().map(formatCurso));
 });
 
+// GET /cursos/:codigo
+router.get('/:codigo', (req, res) => {
+  const curso = repositorio.obtener(req.params.codigo);
+
+  if (!curso) {
+    return res.status(404).json({ error: 'curso no encontrado' });
+  }
+
+  const prerequisites = (curso.prerequisites || []).map((id) => {
+    const req2 = repositorio.obtener(id);
+    return req2 ? { id: req2.id, name: req2.name } : { id, name: null };
+  });
+
+  return res.json({
+    id: curso.id,
+    name: curso.name,
+    credits: curso.credits,
+    cycle: curso.cycle,
+    type: curso.type,
+    prerequisites,
+  });
+});
+
 function formatCurso(curso) {
   return {
     id: curso.id,

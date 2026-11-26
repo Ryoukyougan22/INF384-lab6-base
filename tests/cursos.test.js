@@ -94,3 +94,66 @@ describe('GET /cursos', () => {
     });
   });
 });
+
+describe('GET /cursos/:codigo', () => {
+  // Requisito 2.1 – devuelve el curso con sus requisitos resueltos
+  describe('2.1 código existente', () => {
+    test('responde 200 con id, name, credits, cycle, type y prerequisites', async () => {
+      const res = await request(app).get('/cursos/1INF30');
+
+      expect(res.status).toBe(200);
+      expect(res.body).toMatchObject({
+        id: '1INF30',
+        name: 'Programación 3',
+        credits: 5.0,
+        cycle: 6,
+        type: 'obligatorio',
+      });
+      expect(Array.isArray(res.body.prerequisites)).toBe(true);
+    });
+
+    test('los prerequisitos incluyen id y name de cada curso requerido', async () => {
+      const res = await request(app).get('/cursos/1INF30');
+
+      expect(res.body.prerequisites).toEqual([{ id: '1INF25', name: 'Programación 2' }]);
+    });
+
+    test('curso sin prerequisitos devuelve prerequisites vacío', async () => {
+      const res = await request(app).get('/cursos/1INF25');
+
+      expect(res.status).toBe(200);
+      expect(res.body.prerequisites).toEqual([]);
+    });
+
+    test('curso con múltiples prerequisitos los resuelve todos', async () => {
+      // 1INF32 requiere 1INF27 y 1INF25
+      const res = await request(app).get('/cursos/1INF32');
+
+      expect(res.status).toBe(200);
+      expect(res.body.prerequisites).toHaveLength(2);
+      expect(res.body.prerequisites).toEqual(
+        expect.arrayContaining([
+          { id: '1INF27', name: 'Algoritmia y Estructura de Datos' },
+          { id: '1INF25', name: 'Programación 2' },
+        ]),
+      );
+    });
+  });
+
+  // Requisito 2.2 – código inexistente → 404
+  describe('2.2 código inexistente → 404', () => {
+    test('responde 404 con mensaje de error', async () => {
+      const res = await request(app).get('/cursos/NOEXISTE');
+
+      expect(res.status).toBe(404);
+      expect(res.body).toEqual({ error: 'curso no encontrado' });
+    });
+
+    test('código con formato válido pero no registrado también devuelve 404', async () => {
+      const res = await request(app).get('/cursos/9INF99');
+
+      expect(res.status).toBe(404);
+      expect(res.body).toEqual({ error: 'curso no encontrado' });
+    });
+  });
+});
