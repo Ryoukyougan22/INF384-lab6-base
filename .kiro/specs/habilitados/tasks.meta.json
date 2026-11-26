@@ -24,6 +24,18 @@
         "chatSessionId": "sess_09775bb0-b14d-4e11-97ad-d62412cd526f",
         "timestamp": 1795731110485
       }
+    ],
+    "3. Implementar `POST /habilitados` con validación completa de entrada": [
+      {
+        "executionId": "774368ca-a933-4da7-9c05-c164720035eb",
+        "chatSessionId": "sess_0014e0ec-d8d8-42e5-b8dc-e7f2551b51b4",
+        "timestamp": 1795731201162
+      },
+      {
+        "executionId": "774368ca-a933-4da7-9c05-c164720035eb",
+        "chatSessionId": "sess_0014e0ec-d8d8-42e5-b8dc-e7f2551b51b4",
+        "timestamp": 1795731371303
+      }
     ]
   }
 }

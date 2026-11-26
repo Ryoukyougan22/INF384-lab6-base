@@ -19,7 +19,7 @@
   - Verificar que las pruebas existentes de `repositorio.test.js` siguen pasando.
   - _Requisitos: 1.1, 1.2, 1.3, 1.6, 1.7_
 
-- [ ] 3. Implementar `POST /habilitados` con validación completa de entrada
+- [x] 3. Implementar `POST /habilitados` con validación completa de entrada
   - Crear `src/routes/habilitados.js` con el router Express y el handler `POST /`.
   - Aplicar el orden de validación del diseño (decisión 7): verificar explícitamente Content-Type application/json (admitir charset válido), presencia del cuerpo como objeto y presencia y tipo de `aprobados` (array); longitud bruta ≤ 200 antes de deduplicar; cada elemento es string con formato `/^[A-Z0-9]{2,10}$/i` y coincidencia de cadena completa (rechazar saltos de línea finales); normalizar a mayúsculas con `toUpperCase()`; deduplicar con `Set`; descartar códigos no presentes en el repositorio usando `repositorio.obtener`; invocar `repositorio.calcularHabilitados(aprobadosSet)`; responder 200 con el array de cursos con los campos `id`, `name`, `credits`, `cycle`, `type` y `prerequisites`.
   - Montar el router en `src/app.js` bajo `/habilitados`, antes del middleware global de error.

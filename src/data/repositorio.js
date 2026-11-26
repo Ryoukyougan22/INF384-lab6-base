@@ -20,7 +20,7 @@ function obtener(codigo) {
 }
 
 function calcularHabilitados(aprobadosSet) {
-  return listar().filter(
+  return module.exports.listar().filter(
     (curso) =>
       !aprobadosSet.has(curso.id) &&
       curso.prerequisites.every((id) => aprobadosSet.has(id)),

@@ -40,16 +40,13 @@ describe('POST /habilitados', () => {
       expect(res.status).toBe(200);
       expect(Array.isArray(res.body)).toBe(true);
       for (const curso of res.body) {
-        expect(curso).toEqual(
-          expect.objectContaining({
-            id: expect.any(String),
-            name: expect.any(String),
-            credits: expect.any(Number),
-            cycle: expect.any(Number),
-            type: expect.any(String),
-            prerequisites: expect.any(Array),
-          }),
-        );
+        expect(typeof curso.id).toBe('string');
+        expect(typeof curso.name).toBe('string');
+        expect(typeof curso.credits).toBe('number');
+        // cycle puede ser number o null según el catálogo real
+        expect(curso.cycle === null || typeof curso.cycle === 'number').toBe(true);
+        expect(typeof curso.type).toBe('string');
+        expect(Array.isArray(curso.prerequisites)).toBe(true);
         // Exactamente seis campos
         expect(Object.keys(curso)).toHaveLength(6);
       }
