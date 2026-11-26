@@ -12,6 +12,18 @@
         "chatSessionId": "sess_4aec8f95-6f0f-4bac-bfad-6cf3487238ec",
         "timestamp": 1795730795257
       }
+    ],
+    "2. Implementar `calcularHabilitados(aprobadosSet)` en el repositorio": [
+      {
+        "executionId": "ed4f934e-2453-4024-bcbb-4f1d292f6b0c",
+        "chatSessionId": "sess_09775bb0-b14d-4e11-97ad-d62412cd526f",
+        "timestamp": 1795730959938
+      },
+      {
+        "executionId": "ed4f934e-2453-4024-bcbb-4f1d292f6b0c",
+        "chatSessionId": "sess_09775bb0-b14d-4e11-97ad-d62412cd526f",
+        "timestamp": 1795731110485
+      }
     ]
   }
 }

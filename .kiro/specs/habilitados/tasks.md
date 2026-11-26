@@ -11,7 +11,7 @@
   - Conservar todas las pruebas existentes en los otros archivos de test.
   - _Requisitos: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 3.1, 3.2, 3.3, 3.4, 4.1, 4.2, 4.3, 4.4_
 
-- [ ] 2. Implementar `calcularHabilitados(aprobadosSet)` en el repositorio
+- [x] 2. Implementar `calcularHabilitados(aprobadosSet)` en el repositorio
   - Añadir la función `calcularHabilitados(aprobadosSet)` en `src/data/repositorio.js` según la interfaz de diseño: filtrar `listar()` descartando cursos cuyo `id` esté en el `Set` y conservando solo los que tienen todos sus `prerequisites` en el `Set`.
   - Verificar contra los datos reales de `data/cursos.json` que `listar()` preserva el campo `prerequisites` como array de strings de IDs y que el formato y capitalización de los códigos cumplen el diseño. No alterar el catálogo para forzar los resultados.
   - Exportar la función junto a las existentes (`listar`, `listarPorCiclo`, `obtener`).
