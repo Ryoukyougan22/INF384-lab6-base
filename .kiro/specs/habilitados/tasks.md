@@ -28,7 +28,7 @@
   - Verificar que las rutas existentes (`GET /cursos`, `GET /cursos/:codigo`, `GET /health`) siguen pasando sus pruebas.
   - _Requisitos: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 2.1, 2.2, 2.3, 2.4, 2.5, 3.1, 3.2, 3.3, 3.4, 4.1, 4.4_
 
-- [ ] 4. Implementar manejo seguro de errores del parser y errores inesperados
+- [x] 4. Implementar manejo seguro de errores del parser y errores inesperados
   - Añadir en `src/app.js` un middleware de error específico para los errores del parser de Express, antes del middleware genérico de 500. Identificar `err.type === 'entity.parse.failed'` → 400 `{"error":"cuerpo JSON inválido"}`; `err.type === 'entity.too.large'` → 413 `{"error":"cuerpo de solicitud demasiado grande"}`.
   - Configurar `express.json()` con `{ limit: '100kb' }` para activar la protección de tamaño de bytes. Identificar otros errores esperados del parser (por ejemplo charset o encoding no soportado) y responder con un 4xx seguro según design.md.
   - Verificar el control de `Content-Type` incorrecto o body ausente del handler (devuelve 400 `{"error":"se requiere un cuerpo JSON"}`).

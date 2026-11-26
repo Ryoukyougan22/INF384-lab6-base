@@ -4,7 +4,7 @@ const repositorio = require('./data/repositorio');
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json({ limit: '100kb' }));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.get('/health', (req, res) => {
