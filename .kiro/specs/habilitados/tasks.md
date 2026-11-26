@@ -1,6 +1,6 @@
 # Implementation Plan: Cursos habilitados para matrícula
 
-- [ ] 1. Crear las pruebas de aceptación inicialmente fallidas
+- [x] 1. Crear las pruebas de aceptación inicialmente fallidas
   - Crear `tests/habilitados.test.js` con los casos de la matriz de pruebas del `design.md` (criterios 1.1–4.4). Los spies o mocks que dependan de funciones todavía inexistentes se completan en las tareas 2–5; no introducir errores de importación ni simular resultados.
   - Incluir los tests red-green de los tres hallazgos de seguridad con sus nombres exactos de la tabla de pruebas:
     - `5000 códigos válidos responden 400` (hallazgo DoS, criterio 3.3)
